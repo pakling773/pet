@@ -130,7 +130,21 @@ class App extends React.Component<Props, State> {
                 />
               )}
             />
-            <Route path="/register" component={Register} />
+
+
+<Route
+              path="/register"
+              render={(props) => (
+                <Register
+                  AfterLogin={this.AfterLogin}
+               
+                  {...props}
+                />
+              )}
+            />
+
+
+             
           </Switch>
           <Footer />
         </Router>
