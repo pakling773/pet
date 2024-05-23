@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@agile-ts/core": "^0.2.9",
-    "@agile-ts/react": "^0.2.4",
+   
     "@react-rxjs/core": "^0.10.7",
     "@react-rxjs/utils": "^0.9.7",
     "@testing-library/jest-dom": "^5.17.0",
