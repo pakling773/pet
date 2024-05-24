@@ -32,6 +32,8 @@ function PetFormComponent() {
   const history = useHistory();
   let { id } = useParams<any>();
 
+  const [breedId, setBreedId] = useState(0);
+
   const [msg, setMsg] = useState("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [breeds, setBreeds] = useState<AnimalBreed[] | null>([]);
@@ -59,13 +61,13 @@ function PetFormComponent() {
         .get(environment.endpoint + "animal/get/" + id)
         .then((response) => {
           const result = response.data.data[0] as IAnimal;
-          console.log(result);
 
           setValue("name", result?.name);
           setValue("color", result?.color);
           setValue("age", result?.age);
           setValue("price", result?.price);
           setValue("breed_id", result?.breed_id);
+
           setValue("description", result?.description);
           setValue("short_description", result?.short_description);
 
@@ -81,6 +83,8 @@ function PetFormComponent() {
                 setAnimalImages(data);
               }
             });
+
+          setBreedId(result?.breed_id);
         })
         .catch((error) => {
           setMsg("Failed to get breeds");
@@ -92,6 +96,7 @@ function PetFormComponent() {
     try {
       const response = await axios.get(environment.endpoint + "breed/list");
       const result = response.data.data ?? ([] as AnimalBreed[]);
+
       if (result?.length >= 1) {
         setBreeds(result);
       }
@@ -218,6 +223,20 @@ function PetFormComponent() {
     setShowPopup(false);
   };
 
+  const fetchImages = async () => {
+    console.log(breeds);
+    console.log(breedId);
+
+    const breedNameArr = breeds.filter((row, i) => row.id == breedId);
+    const breedName = breedNameArr[0].name;
+    const data = await fetch(
+      `https://dog.ceo/api/breed/${breedName}/images/random/3`
+    );
+    const images = await data.json();
+    console.log(images);
+    // call http to save images
+  };
+
   return (
     <>
       {showPopup && (
@@ -263,7 +282,7 @@ function PetFormComponent() {
                     onSubmit={handleSubmit(onSubmit)}
                   >
                     <div className="row">
-                      <div className=" col-12">
+                      <div className=" col-6">
                         <div className="form-grp mb-3">
                           <label htmlFor="name" className="">
                             Name <span>*</span>
@@ -284,9 +303,6 @@ function PetFormComponent() {
                           )}
                         </div>
                       </div>
-                    </div>
-
-                    <div className="row">
                       <div className="col-md-6 col-12">
                         <div className="form-grp mb-3">
                           <label htmlFor="color" className="">
@@ -308,6 +324,9 @@ function PetFormComponent() {
                           )}
                         </div>
                       </div>
+                    </div>
+
+                    <div className="row">
                       <div className="col-md-6 col-12">
                         <div className="form-grp mb-3">
                           <label htmlFor="age" className="">
@@ -329,9 +348,6 @@ function PetFormComponent() {
                           )}
                         </div>
                       </div>
-                    </div>
-
-                    <div className="row">
                       <div className="col-md-6 col-12">
                         <div className="form-grp mb-3">
                           <label htmlFor="price" className="">
@@ -354,7 +370,9 @@ function PetFormComponent() {
                           )}
                         </div>
                       </div>
+                    </div>
 
+                    <div className="row">
                       <div className="col-md-6 col-12">
                         <div className="form-grp mb-3">
                           <label htmlFor="address_line_1" className="">
@@ -379,11 +397,12 @@ function PetFormComponent() {
                               required: true,
                               maxLength: 20,
                             })}
+                            defaultValue={breedId.toString()}
                           >
                             <option>Open this select menu</option>
                             {breeds?.map((breed, index) => {
                               return (
-                                <option key={index} value={breed.id}>
+                                <option key={breed.id} value={breed.id}>
                                   {breed.name}
                                 </option>
                               );
@@ -395,6 +414,17 @@ function PetFormComponent() {
                             </span>
                           )}
                         </div>
+                      </div>
+
+                      <div className="col-md-6 col-12">
+                        <button
+                          type="button"
+                          className="btn rounded-btn  justify-content-center"
+                          onClick={fetchImages}
+                          style={{ marginTop: "32px" }}
+                        >
+                          Fetch Dog Image
+                        </button>
                       </div>
                     </div>
 
