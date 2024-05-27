@@ -4,7 +4,7 @@ import PetFormComponent from "../components/petForm/PetFormComponent";
 
 function PetFormPage() {
   return (
-    <>
+    <div>
       <AddNewPetBreadcumb />
       <div className="shop-area pt-110 pb-110">
         <div className="container">
@@ -20,7 +20,7 @@ function PetFormPage() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

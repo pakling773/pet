@@ -31,6 +31,8 @@ interface AnimalImage {
 function PetFormComponent() {
   const history = useHistory();
   let { id } = useParams<any>();
+  // var dogImages = "";
+  const [dogImages, setDogImages] = useState("");
 
   const [breedId, setBreedId] = useState(0);
 
@@ -75,7 +77,7 @@ function PetFormComponent() {
             .get(environment.endpoint + "animal/photos/" + result.id)
             .then((res) => {
               const data = res.data.images as AnimalImage[];
-              console.log(data);
+
               if (data.length >= 1) {
                 // const petImages = data.map(
                 //   (pet) => environment.basepath + "uploads/" + pet.image
@@ -146,6 +148,7 @@ function PetFormComponent() {
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     setIsSubmitting(true);
+
     const requestOptions = {
       name: data.name,
       color: data.color,
@@ -224,16 +227,31 @@ function PetFormComponent() {
   };
 
   const fetchImages = async () => {
-    console.log(breeds);
-    console.log(breedId);
+    // const breedNameArr = breeds.filter((row, i) => row.id == breedId);
+    const breedName = $("#breed_id_select").find(":selected").text(); //// breedNameArr[0].name;
+    console.log(breedName);
+    if (breedName == "") {
+      alert("Please select a breed first");
+      return false;
+    }
 
-    const breedNameArr = breeds.filter((row, i) => row.id == breedId);
-    const breedName = breedNameArr[0].name;
     const data = await fetch(
       `https://dog.ceo/api/breed/${breedName}/images/random/3`
     );
-    const images = await data.json();
-    console.log(images);
+    const { message } = await data.json();
+    console.log(message);
+
+    var img_div = "";
+
+    message.map((image, i) => {
+      var img = `  <div class="dog-image col-md-4">
+  <img src="${image}" />
+  </div>`;
+      img_div = img_div + img;
+    });
+
+    setDogImages(img_div);
+
     // call http to save images
   };
 
@@ -383,6 +401,7 @@ function PetFormComponent() {
                             className="form-select "
                             aria-label="breed select"
                             name="breed_id"
+                            id="breed_id_select"
                             style={{
                               width: "100%",
                               background: "#f5f2eb",
@@ -399,7 +418,7 @@ function PetFormComponent() {
                             })}
                             defaultValue={breedId.toString()}
                           >
-                            <option>Open this select menu</option>
+                            <option value="">Select a breed first</option>
                             {breeds?.map((breed, index) => {
                               return (
                                 <option key={breed.id} value={breed.id}>
@@ -425,6 +444,14 @@ function PetFormComponent() {
                         >
                           Fetch Dog Image
                         </button>
+                      </div>
+                    </div>
+                    <div className="form-grp mb-3">
+                      <div className="  col-12">
+                        <div
+                          className="row dog-images"
+                          dangerouslySetInnerHTML={{ __html: dogImages }}
+                        ></div>
                       </div>
                     </div>
 
