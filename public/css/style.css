@@ -4165,7 +4165,8 @@ label {
   padding: 2px;
   top: 5px;
   right: 5px;
-  transition: all 0.2s ease-in-out;
+  /* transition: all 0.2s ease-in-out; */
+  background-color: black;
 }
 
 .image-upload-card:hover .remove-image-icon {

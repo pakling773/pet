@@ -230,7 +230,7 @@ function PetFormComponent() {
     // const breedNameArr = breeds.filter((row, i) => row.id == breedId);
     const breedName = $("#breed_id_select").find(":selected").text(); //// breedNameArr[0].name;
     console.log(breedName);
-    if (breedName == "") {
+    if (breedName == "Select a breed first") {
       alert("Please select a breed first");
       return false;
     }
@@ -238,17 +238,19 @@ function PetFormComponent() {
     const data = await fetch(
       `https://dog.ceo/api/breed/${breedName}/images/random/3`
     );
-    const { message } = await data.json();
+    const { message, status } = await data.json();
     console.log(message);
 
     var img_div = "";
 
-    message.map((image, i) => {
-      var img = `  <div class="dog-image col-md-4">
-  <img src="${image}" />
-  </div>`;
-      img_div = img_div + img;
-    });
+    if (status == "success") {
+      message.map((image, i) => {
+        var img = `<div class="dog-image col-md-4">
+            <img src="${image}" />
+            </div>`;
+        img_div = img_div + img;
+      });
+    }
 
     setDogImages(img_div);
 
