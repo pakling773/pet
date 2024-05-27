@@ -31,6 +31,7 @@ interface AnimalImage {
 function PetFormComponent() {
   const history = useHistory();
   let { id } = useParams<any>();
+  console.log(id);
   // var dogImages = "";
   const [dogImages, setDogImages] = useState("");
 
@@ -166,11 +167,13 @@ function PetFormComponent() {
       return;
     }
 
-    const requestFunction = id !== null ? axios.put : axios.post;
-    const url = id !== null ? `animal/update/${id}` : "animal/save";
-
+    const requestFunction = id ? axios.put : axios.post;
+    const url = id ? `animal/update/${id}` : "animal/save";
+    console.log(url);
     requestFunction(environment.endpoint + url, requestOptions)
       .then((res) => {
+        console.log(res);
+
         if (selectedImageFiles?.length >= 1) {
           const formData = new FormData();
           for (let i = 0; i < selectedImageFiles?.length; i++) {
