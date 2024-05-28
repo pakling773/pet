@@ -3,6 +3,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { environment } from "../environment/environment";
 
+// require ""
+
 interface Props {}
 
 const InitialState = {
@@ -54,9 +56,11 @@ class PetsShop extends React.Component<Props, State> {
           </div>
 
           <div className="row justify-content-center">
-            {this.state.animals.length === 0
-              ? "Loading Animals..."
-              : this.state.animals.map((animal) => this.getItem(animal))}
+            {this.state.animals.length === 0 ? (
+              <div>asdf</div>
+            ) : (
+              this.state.animals.map((animal) => this.getItem(animal))
+            )}
           </div>
         </div>
       </section>

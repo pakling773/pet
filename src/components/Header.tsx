@@ -184,11 +184,11 @@ function Header(props: Props) {
                   </div>
                   <div className="header-action d-none d-md-block">
                     <ul>
-                      <li className="header-search">
+                      {/* <li className="header-search">
                         <a>
                           <i className="flaticon-search" />
                         </a>
-                      </li>
+                      </li> */}
 
                       <li className="header-shop-cart">
                         <a href="/#">

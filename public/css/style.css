@@ -443,7 +443,7 @@ label {
   padding-left: 28px;
   position: relative;
 }
-.header-action > ul::before {
+/* .header-action > ul::before {
   content: "";
   position: absolute;
   left: 0;
@@ -452,7 +452,7 @@ label {
   width: 2.5px;
   height: 45px;
   background: #edece6;
-}
+} */
 .header-action > ul li {
   position: relative;
   margin-left: 25px;
@@ -4231,3 +4231,5 @@ label {
 }
 
  
+
+
