@@ -98,7 +98,7 @@ function Login(props) {
                       Password <span>*</span>
                     </label>
                     <input
-                      type="text"
+                      type="password"
                       id="password"
                       placeholder="Enter your password"
                       {...register("password", {

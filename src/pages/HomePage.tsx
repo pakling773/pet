@@ -6,7 +6,7 @@ function HomePage() {
   return (
     <main>
       <MainSlider />
-      <Find />
+      {/* <Find /> */}
       <PetsShop />
     </main>
   );

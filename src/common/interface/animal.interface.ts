@@ -9,6 +9,7 @@ export interface IAnimal {
   short_description?: string;
   description?: string;
   image?: string | null;
+  gender?:string | null;
 }
 
 export interface IAnimalBreed {

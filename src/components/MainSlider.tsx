@@ -46,7 +46,7 @@ function MainSlider() {
                       </p>
                     </div>
                     <Link
-                      to="/doglist"
+                      to="/view-all"
                       className="btn"
                       data-animation="fadeInUpBig"
                       data-delay=".6s"

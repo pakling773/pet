@@ -74,6 +74,7 @@ class PetDetailsArea extends React.Component<Props, State> {
       );
       const result = animal_http.data.data[0];
       data.animal = result;
+      console.warn(data.animal);
       //
 
       const breed_http = await axios.get(
@@ -122,6 +123,10 @@ class PetDetailsArea extends React.Component<Props, State> {
   onChangeAnimalImage(image: string): void {
     // setAnimalImage(image);
     this.setState({ selectedImage: image });
+  }
+
+  capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
   render() {
@@ -246,6 +251,18 @@ class PetDetailsArea extends React.Component<Props, State> {
                         <h5 className="price"> Free</h5>
                       )}
                     </div>
+
+                    <div className="shop-details-price">
+                      Gender: &nbsp;
+                      <h5 className="price">
+                        {this.state.animal?.gender
+                          ? this.capitalizeFirstLetter(
+                              this.state.animal?.gender
+                            )
+                          : ""}
+                      </h5>
+                    </div>
+
                     <p>{this.state.animal?.short_description}</p>
 
                     <div className="shop-details-color">

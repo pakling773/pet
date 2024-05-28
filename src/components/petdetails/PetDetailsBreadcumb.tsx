@@ -10,14 +10,14 @@ function PetDetailsBreadcumb() {
         <div className="row">
           <div className="col-12">
             <div className="breadcrumb-content">
-              <h2 className="title">Shop Details</h2>
+              <h2 className="title">Dog Details</h2>
               <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
                   <li className="breadcrumb-item">
                     <Link to="/">Home</Link>
                   </li>
                   <li className="breadcrumb-item active" aria-current="page">
-                    Shop-details
+                    dog-details
                   </li>
                 </ol>
               </nav>

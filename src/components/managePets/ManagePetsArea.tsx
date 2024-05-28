@@ -33,13 +33,15 @@ class ManagePetsArea extends React.Component<Props, State> {
 
   componentDidMount() {
     const path = window.location.href.split("/").pop();
-    console.log(path);
-    if (path !== "manage") {
-      this.search([], path);
-      this.setState({ isSearch: true });
-    } else {
-      this.getAnimals();
-    }
+    // console.log(path);
+    // if (path !== "manage") {
+    //   this.search([], path);
+    //   this.setState({ isSearch: true });
+    // } else {
+    //   this.getAnimals();
+    // }
+
+    this.getAnimals();
   }
   clearSearch() {
     this.getAnimals();
@@ -107,7 +109,7 @@ class ManagePetsArea extends React.Component<Props, State> {
             <div className="col-lg-9">
               <div className="shop-wrap">
                 <div className="d-flex align-items-center justify-content-between mb-4">
-                  <h4 className="title m-0 me-3">Shop</h4>
+                  <h4 className="title m-0 me-3">Find Your Dog</h4>
                   {this.isManager ? (
                     <Link to="/pet/add" className="btn">
                       Add New Pet <img src="img/icon/w_pawprint.png" alt="" />

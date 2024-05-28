@@ -305,7 +305,7 @@ function PetFormComponent() {
                     onSubmit={handleSubmit(onSubmit)}
                   >
                     <div className="row">
-                      <div className=" col-6">
+                      <div className=" col-12 col-md-6">
                         <div className="form-grp mb-3">
                           <label htmlFor="name" className="">
                             Name <span>*</span>

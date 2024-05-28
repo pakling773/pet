@@ -30,8 +30,10 @@ export default function PetRequestModal(props) {
           "modal-backdrop"
         ) as HTMLCollection;
         locModal.style.display = "none";
+
         locModal.className = "modal fade";
         back[0].style.opacity = 0;
+        back[0].style.display = "none";
       }
     } else {
       alert("Please enter why do you want to adopt this pet.");

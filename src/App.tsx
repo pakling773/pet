@@ -106,6 +106,10 @@ class App extends React.Component<Props, State> {
             <ScrollToTopRoute exact={true} path="/manage">
               <PetsPages />
             </ScrollToTopRoute>
+
+            <ScrollToTopRoute exact={true} path="/view-all">
+              <PetsPages />
+            </ScrollToTopRoute>
             <ScrollToTopRoute exact={true} path="/manage/:keyword">
               <PetsPages />
             </ScrollToTopRoute>
