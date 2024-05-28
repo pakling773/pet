@@ -126,7 +126,7 @@ class PetDetailsArea extends React.Component<Props, State> {
 
   render() {
     return (
-      <>
+      <div>
         <section className="shop-details-area pt-110 pb-50">
           <div className="container">
             <div className="shop-details-wrap">
@@ -238,11 +238,12 @@ class PetDetailsArea extends React.Component<Props, State> {
                     <h2 className="title">{this.state.animal?.name}</h2>
 
                     <div className="shop-details-price">
+                      Adoption Fee:&nbsp;
                       {this.state.animal?.price !== 0 ||
                       this.state.animal?.price ? (
-                        <h2 className="price"> ${this.state.animal?.price}</h2>
+                        <h5 className="price"> ${this.state.animal?.price}</h5>
                       ) : (
-                        <h2 className="price">Free</h2>
+                        <h5 className="price"> Free</h5>
                       )}
                     </div>
                     <p>{this.state.animal?.short_description}</p>
@@ -323,7 +324,7 @@ class PetDetailsArea extends React.Component<Props, State> {
           </div>
           <PetRequestModal animal_id={this.state.id} />
         </section>
-      </>
+      </div>
     );
   }
 }

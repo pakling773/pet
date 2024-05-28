@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { Link } from "react-router-dom";
 import { environment } from "../environment/environment";
+import Loading from "./loading";
 
 // require ""
 
@@ -34,6 +35,10 @@ class PetsShop extends React.Component<Props, State> {
       .catch((error) => console.log(error));
   }
 
+  capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   render() {
     return (
       <section className="adoption-shop-area">
@@ -57,7 +62,9 @@ class PetsShop extends React.Component<Props, State> {
 
           <div className="row justify-content-center">
             {this.state.animals.length === 0 ? (
-              <div>asdf</div>
+              <div className="col-md-12" style={{ textAlign: "center" }}>
+                <Loading />
+              </div>
             ) : (
               this.state.animals.map((animal) => this.getItem(animal))
             )}
@@ -111,7 +118,8 @@ class PetsShop extends React.Component<Props, State> {
                   <i className="fas fa-star" />
                 </li>
                 <li className="price">
-                  Total Price : <span>{animal.price}</span>
+                  Gender :{" "}
+                  <span>{this.capitalizeFirstLetter(animal.gender)}</span>
                 </li>
               </ul>
             </div>
