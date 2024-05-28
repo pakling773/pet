@@ -41,8 +41,8 @@ function MainSlider() {
                         data-delay=".4s"
                         data-duration="1.2s"
                       >
-                        Human Shampoo on Dogs After six days of delirat, the
-                        jury found Hernandez guilty of first-degree murder
+                        To have a friend-a pal. You know, man's best friend is
+                        his dog.
                       </p>
                     </div>
                     <Link

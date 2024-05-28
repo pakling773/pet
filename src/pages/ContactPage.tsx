@@ -7,7 +7,6 @@ function ContactPage() {
     <main>
       <ContactBreadCumb />
       <ContactForm />
-      <NewsLetter />
     </main>
   );
 }

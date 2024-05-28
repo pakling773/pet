@@ -25,7 +25,7 @@ function Footer() {
                   </div>
                   <div className="content">
                     <h4 className="title">
-                      <a href="tel:0987654321">747-800-9880</a>
+                      <a href="tel:(+852) 6683 0161">(+852) 6683 0161</a>
                     </h4>
                     <span>Call Now</span>
                   </div>
@@ -169,7 +169,7 @@ function Footer() {
           <div className="row">
             <div className="col-md-8">
               <div className="copyright-text">
-                <p>Copyright © 2022 kutto. All Rights Reserved.</p>
+                <p>Copyright © 2024 Pakling Pet. All Rights Reserved.</p>
               </div>
             </div>
             <div className="col-md-4 d-none d-md-block"></div>

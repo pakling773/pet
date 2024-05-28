@@ -12,7 +12,8 @@ function ContactAddress() {
                 <i className="fas fa-map-marker-alt" />
               </div>
               <div className="content">
-                <p>W84 New Park Lan, New York, NY 4586 United States</p>
+                <p>Hong Kong
+</p>
               </div>
             </li>
             <li>
@@ -20,17 +21,11 @@ function ContactAddress() {
                 <i className="fas fa-phone-alt" />
               </div>
               <div className="content">
-                <p>+9 (256) 254 9568</p>
+                <p> (+852) 6683 0161
+</p>
               </div>
             </li>
-            <li>
-              <div className="icon">
-                <i className="fas fa-envelope-open" />
-              </div>
-              <div className="content">
-                <p>Contact@ info.com</p>
-              </div>
-            </li>
+           
           </ul>
         </div>
 

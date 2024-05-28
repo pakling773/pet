@@ -8,56 +8,39 @@ function Find() {
           <div className="col-12">
             <form>
               <div className="find-wrap">
-                <div className="location">
-                  <i className="flaticon-location" />
-                  <input type="text" defaultValue="Enter City, State. or Zip" />
+                <div
+                  className="location"
+                  style={{ fontWeight: "bold", fontSize: 18 }}
+                >
+                  Latest Adoptoins
                 </div>
                 <div className="find-category">
                   <ul>
                     <li>
-                      <Link to="/shop">
+                      <Link to="/view-all">
                         <i className="flaticon-dog" /> Find Your Dog
                       </Link>
                     </li>
                     <li>
-                      <Link to="/shop">
+                      <Link to="/view-all">
                         <i className="flaticon-happy" /> Find Your Cat
                       </Link>
                     </li>
                     <li>
-                      <Link to="/shop">
+                      <Link to="/view-all">
                         <i className="flaticon-dove" /> Find Your Birds
                       </Link>
                     </li>
                   </ul>
                 </div>
                 <div className="other-find">
-                  <div className="dropdown">
-                    <button
-                      className="btn dropdown-toggle"
-                      type="button"
-                      id="dropdownMenuButton"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    >
-                      Find Other Pets
-                    </button>
-                    <div
-                      className="dropdown-menu"
-                      aria-labelledby="dropdownMenuButton"
-                    >
-                      <Link className="dropdown-item" to="/shop">
-                        Find Your Dog
-                      </Link>
-                      <Link className="dropdown-item" to="/shop">
-                        Find Your Cat
-                      </Link>
-                      <Link className="dropdown-item" to="/shop">
-                        Find Your Birds
-                      </Link>
-                    </div>
-                  </div>
+                  <Link
+                    to="/view-all"
+                    type="button"
+                    style={{ color: "white", fontWeight: "bold" }}
+                  >
+                    Find All Dogs
+                  </Link>
                 </div>
               </div>
             </form>
