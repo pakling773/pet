@@ -10,6 +10,7 @@ import HomePage from "./pages/HomePage";
 import PetDetailsPage from "./pages/PetDetailsPage";
 import PetsPages from "./pages/PetsPages";
 import { findIndex } from "lodash";
+import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
 
 import Login from "./pages/Login";
 import "./App.css";
@@ -73,9 +74,19 @@ class App extends React.Component<Props, State> {
     this.setState({ loginState: true });
   };
 
+  onLoad = () => {
+    console.log("onLoad works!");
+  };
+
   render() {
     return (
       <div className="app">
+        <TawkMessengerReact
+          propertyId="66572913981b6c56477624be"
+          widgetId="1hv27gt96"
+          onLoad={this.onLoad}
+        />
+
         <Router>
           <Header
             favItems={this.state.favItems}

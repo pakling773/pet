@@ -7,6 +7,7 @@ import MiniCart from "./header/mini-cart";
 import { useHistory } from "react-router-dom";
 import { IAnimal } from "../common/interface/animal.interface";
 import AuthService from "../common/Auth.service";
+
 interface Props {
   favItems: IAnimal[];
   onRemoveFav: any;
