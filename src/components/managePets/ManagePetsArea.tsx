@@ -132,7 +132,7 @@ class ManagePetsArea extends React.Component<Props, State> {
 
                 <div className="row justify-content-center">
                   {animals.length
-                    ? animals?.reverse().map((animal, index) => {
+                    ? animals?.map((animal, index) => {
                         return this.getItemCard(animal, index);
                       })
                     : "Animals not found. Please try another keyword."}
