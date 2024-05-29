@@ -447,7 +447,7 @@ function PetFormComponent() {
                           onClick={fetchImages}
                           style={{ marginTop: "32px" }}
                         >
-                          Fetch Dog Image
+                          Check Dog Image Reference
                         </button>
                       </div>
                     </div>

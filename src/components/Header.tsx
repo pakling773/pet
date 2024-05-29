@@ -91,7 +91,7 @@ function Header(props: Props) {
             <div className="col-md-7">
               <div className="header-top-left">
                 <ul>
-                  <li>Call us: 747-800-9880</li>
+                  <li>Call us: (+852) 6683 0161</li>
                   <li>
                     <i className="far fa-clock" />
                     Opening Hours: 7:00 am - 9:00 pm (Mon - Sun)
@@ -161,7 +161,13 @@ function Header(props: Props) {
                             Manage Pets
                           </Link>
                         </li>
-                      ) : null}
+                      ) : (
+                        <li className="">
+                          <Link to="/view-all" onClick={(e) => handleActive(e)}>
+                            Find Your Dog
+                          </Link>
+                        </li>
+                      )}
 
                       {isManager ? (
                         <li className="">

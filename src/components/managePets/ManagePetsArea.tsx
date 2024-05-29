@@ -168,15 +168,19 @@ class ManagePetsArea extends React.Component<Props, State> {
               <Link to={"/pet-details/" + animal.id}>{animal?.name}</Link>
             </h4>
             <div className="shop-content-bottom">
-              <span className="price">${animal.price}</span>
-              <span className="add-cart">
-                <Link
-                  className="d-flex align-items-center"
-                  to={"/pet/" + animal.id}
-                >
-                  Edit
-                </Link>
-              </span>
+              <span className="price">{animal.gender}</span>
+              {this.isManager ? (
+                <span className="add-cart">
+                  <Link
+                    className="d-flex align-items-center"
+                    to={"/pet/" + animal.id}
+                  >
+                    Edit
+                  </Link>
+                </span>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>
