@@ -23,6 +23,7 @@ export default function PetRequestModal(props) {
         environment.endpoint + "animal/request",
         data
       );
+
       if (response.data.success) {
         alert("Pet requested for adoption. We will contact you soon");
         var locModal: any = document.getElementById("requestModal");
@@ -34,6 +35,12 @@ export default function PetRequestModal(props) {
         locModal.className = "modal fade";
         back[0].style.opacity = 0;
         back[0].style.display = "none";
+
+        var modalOpen: any = document.getElementsByClassName(
+          "modal-open"
+        ) as HTMLCollection;
+        modalOpen[0].style.overflow = "auto";
+        $("#reason").val("");
       }
     } else {
       alert("Please enter why do you want to adopt this pet.");

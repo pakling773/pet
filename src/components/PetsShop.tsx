@@ -93,9 +93,7 @@ class PetsShop extends React.Component<Props, State> {
           </div>
           <div className="adoption-shop-content">
             <h4 className="title">
-              <Link to={"/pet-details/" + animal.id}>
-                {animal.name} {animal.id}{" "}
-              </Link>
+              <Link to={"/pet-details/" + animal.id}>{animal.name}</Link>
             </h4>
             <div className="adoption-meta">
               <ul>
