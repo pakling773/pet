@@ -42,6 +42,7 @@ function Login(props) {
   } = useForm<LoginFormInput>();
 
   const onSubmit: SubmitHandler<LoginFormInput> = (data) => {
+    $("#loading").show();
     axios
       .post(environment.basepath + "auth/login", data)
       .then((response) => {
@@ -55,9 +56,11 @@ function Login(props) {
           "Authorization"
         ] = `Bearer ${response.data.accessToken}`;
         props.AfterLogin();
+        $("#loading").hide();
       })
 
       .catch((error) => {
+        $("#loading").hide();
         console.log(error);
         setMsg("Invalid login");
       });
@@ -65,6 +68,7 @@ function Login(props) {
 
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
+      $("#loading").show();
       console.log(tokenResponse);
       // fetching userinfo can be done on the client or the server
       const userInfo = await axios
@@ -89,6 +93,7 @@ function Login(props) {
         "Authorization"
       ] = `Bearer ${backendUser.data.accessToken}`;
       props.AfterLogin();
+      $("#loading").hide();
     },
     // flow: 'implicit', // implicit is the default
   });
@@ -115,6 +120,16 @@ function Login(props) {
                   Fill Your Credential<span>.</span>
                 </h2>
                 <div className="error-input"> {msg}</div>
+              </div>
+              <div
+                style={{
+                  width: "100%",
+                  textAlign: "center",
+                  display: "none",
+                }}
+                id="loading"
+              >
+                <img src="img/loading.gif" alt="" style={{ width: "50px" }} />
               </div>
               <div className="contact-wrap-content">
                 <form
