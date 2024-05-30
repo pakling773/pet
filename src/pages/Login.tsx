@@ -4,6 +4,27 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Redirect } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
 import { environment } from "../environment/environment";
+import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
+
+export interface ItokenResponse {
+  access_token?: string;
+  token_type?: string;
+  expires_in?: number;
+  scope?: string;
+  authuser?: string;
+  prompt?: string;
+}
+export interface IUserInfo {
+  sub?: string;
+  name?: string;
+  given_name?: string;
+  family_name?: string;
+  picture?: string;
+  email?: string;
+  email_verified?: boolean;
+  locale?: string;
+}
 
 interface LoginFormInput {
   email: string;
@@ -25,7 +46,7 @@ function Login(props) {
       .post(environment.basepath + "auth/login", data)
       .then((response) => {
         //login success
-        console.log(response.data);
+
         secureLocalStorage.setItem("accessToken", response.data.accessToken);
         secureLocalStorage.setItem("user_id", response.data.user.id);
         secureLocalStorage.setItem("user_type", response.data.user.user_type);
@@ -41,6 +62,36 @@ function Login(props) {
         setMsg("Invalid login");
       });
   };
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      console.log(tokenResponse);
+      // fetching userinfo can be done on the client or the server
+      const userInfo = await axios
+        .get("https://www.googleapis.com/oauth2/v3/userinfo", {
+          headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+        })
+        .then((res) => res.data);
+
+      const backendUser = await axios.post(
+        environment.basepath + "auth/google-login",
+        userInfo
+      );
+
+      console.log(backendUser.data);
+      const access_token = backendUser.data.accessToken;
+
+      secureLocalStorage.setItem("accessToken", backendUser.data.accessToken);
+      secureLocalStorage.setItem("user_id", backendUser.data.user.id);
+      secureLocalStorage.setItem("user_type", backendUser.data.user.user_type);
+      secureLocalStorage.setItem("email", backendUser.data.user.email);
+      axios.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${backendUser.data.accessToken}`;
+      props.AfterLogin();
+    },
+    // flow: 'implicit', // implicit is the default
+  });
 
   return (
     <section
@@ -112,7 +163,10 @@ function Login(props) {
                       </span>
                     )}
                   </div>
-                  <div className="form-grp checkbox-grp flex-column">
+                  <div
+                    className="form-grp checkbox-grp flex-column"
+                    style={{ marginBottom: "15px" }}
+                  >
                     <div className="d-flex align-items-center form-check">
                       <input
                         className="mt-0 me-2 form-check-input"
@@ -140,13 +194,44 @@ function Login(props) {
                       </a>
                     </div>
                   </div>
-
                   <button
+                    style={{ marginBottom: "15px" }}
                     type="submit"
                     className="btn rounded-btn w-100 justify-content-center"
                   >
                     Login
                   </button>
+                  {/* <GoogleLogin
+                    onSuccess={(credentialResponse) => {
+                      const decoded = jwtDecode(credentialResponse.credential);
+                      console.log(decoded);
+                    }}
+                    onError={() => {
+                      console.log("Login Failed");
+                    }}
+                  /> */}
+
+                  {/* <button
+                    className="gsi-material-button"
+                   
+                  >
+                 
+                  </button> */}
+                  <div
+                    style={{
+                      width: "100%",
+                      cursor: "pointer",
+                      textAlign: "center",
+                    }}
+                  >
+                    <img
+                      src="img/google.svg"
+                      alt=""
+                      onClick={() => {
+                        googleLogin();
+                      }}
+                    />
+                  </div>
                 </form>
               </div>
             </div>

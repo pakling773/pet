@@ -22,6 +22,8 @@ import React from "react";
 import { IAnimal } from "./common/interface/animal.interface";
 import AuthService from "./common/Auth.service";
 import PetRequests from "./pages/PetRequests";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+
 interface Props {}
 
 const InitialState = {
@@ -80,86 +82,88 @@ class App extends React.Component<Props, State> {
 
   render() {
     return (
-      <div className="app">
-        <TawkMessengerReact
-          propertyId="66572913981b6c56477624be"
-          widgetId="1hv27gt96"
-          onLoad={this.onLoad}
-        />
-
-        <Router>
-          <Header
-            favItems={this.state.favItems}
-            onRemoveFav={this.OnRemoveFav}
-            Afterlogout={this.Afterlogout}
-            loginState={this.state.loginState}
+      <GoogleOAuthProvider clientId="829322230728-pca659psfpotio93t32mes9e1mpqc9de.apps.googleusercontent.com">
+        <div className="app">
+          <TawkMessengerReact
+            propertyId="66572913981b6c56477624be"
+            widgetId="1hv27gt96"
+            onLoad={this.onLoad}
           />
-          <Switch>
-            <ScrollToTopRoute exact={true} path="/">
-              <HomePage />
-            </ScrollToTopRoute>
 
-            <ScrollToTopRoute exact={true} path="/pet/add">
-              <AddNewAdoption />
-            </ScrollToTopRoute>
-            <ScrollToTopRoute exact={true} path="/pet/:id">
-              <AddNewAdoption />
-            </ScrollToTopRoute>
-            <ScrollToTopRoute exact={true} path="/contacts">
-              <ContactPage />
-            </ScrollToTopRoute>
-            <ScrollToTopRoute exact={true} path="/blogs">
-              <BlogPage />
-            </ScrollToTopRoute>
-            <ScrollToTopRoute exact={true} path="/blog-details">
-              <BlogDetailsPage />
-            </ScrollToTopRoute>
-            <ScrollToTopRoute exact={true} path="/manage">
-              <PetsPages />
-            </ScrollToTopRoute>
+          <Router>
+            <Header
+              favItems={this.state.favItems}
+              onRemoveFav={this.OnRemoveFav}
+              Afterlogout={this.Afterlogout}
+              loginState={this.state.loginState}
+            />
+            <Switch>
+              <ScrollToTopRoute exact={true} path="/">
+                <HomePage />
+              </ScrollToTopRoute>
 
-            <ScrollToTopRoute exact={true} path="/view-all">
-              <PetsPages />
-            </ScrollToTopRoute>
-            <ScrollToTopRoute exact={true} path="/manage/:keyword">
-              <PetsPages />
-            </ScrollToTopRoute>
-            <ScrollToTopRoute exact={true} path="/pet-details/:id">
-              <PetDetailsPage
-                favItems={this.state.favItems}
-                OnAddToFav={this.OnAddToFav}
+              <ScrollToTopRoute exact={true} path="/pet/add">
+                <AddNewAdoption />
+              </ScrollToTopRoute>
+              <ScrollToTopRoute exact={true} path="/pet/:id">
+                <AddNewAdoption />
+              </ScrollToTopRoute>
+              <ScrollToTopRoute exact={true} path="/contacts">
+                <ContactPage />
+              </ScrollToTopRoute>
+              <ScrollToTopRoute exact={true} path="/blogs">
+                <BlogPage />
+              </ScrollToTopRoute>
+              <ScrollToTopRoute exact={true} path="/blog-details">
+                <BlogDetailsPage />
+              </ScrollToTopRoute>
+              <ScrollToTopRoute exact={true} path="/manage">
+                <PetsPages />
+              </ScrollToTopRoute>
+
+              <ScrollToTopRoute exact={true} path="/view-all">
+                <PetsPages />
+              </ScrollToTopRoute>
+              <ScrollToTopRoute exact={true} path="/manage/:keyword">
+                <PetsPages />
+              </ScrollToTopRoute>
+              <ScrollToTopRoute exact={true} path="/pet-details/:id">
+                <PetDetailsPage
+                  favItems={this.state.favItems}
+                  OnAddToFav={this.OnAddToFav}
+                />
+              </ScrollToTopRoute>
+
+              <ScrollToTopRoute exact={true} path="/request">
+                <PetRequests />
+              </ScrollToTopRoute>
+
+              <Route
+                path="/login"
+                render={(props) => (
+                  <Login
+                    AfterLogin={this.AfterLogin}
+                    loginState={this.state.loginState}
+                    {...props}
+                  />
+                )}
               />
-            </ScrollToTopRoute>
 
-            <ScrollToTopRoute exact={true} path="/request">
-              <PetRequests />
-            </ScrollToTopRoute>
-
-            <Route
-              path="/login"
-              render={(props) => (
-                <Login
-                  AfterLogin={this.AfterLogin}
-                  loginState={this.state.loginState}
-                  {...props}
-                />
-              )}
-            />
-
-            <Route
-              path="/register"
-              render={(props) => (
-                <Register
-                  AfterLogin={this.AfterLogin}
-                  loginState={this.state.loginState}
-                  {...props}
-                />
-              )}
-            />
-          </Switch>
-          <Footer />
-        </Router>
-      </div>
+              <Route
+                path="/register"
+                render={(props) => (
+                  <Register
+                    AfterLogin={this.AfterLogin}
+                    loginState={this.state.loginState}
+                    {...props}
+                  />
+                )}
+              />
+            </Switch>
+            <Footer />
+          </Router>
+        </div>
+      </GoogleOAuthProvider>
     );
   }
 }
