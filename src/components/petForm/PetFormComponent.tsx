@@ -198,7 +198,7 @@ function PetFormComponent() {
             .then(async (response) => {
               console.log(response);
 
-              if (id) {
+              if (!id) {
                 const facebook = await axios.get(
                   environment.endpoint + "/animal/facebook-post/" + animalID
                 );
