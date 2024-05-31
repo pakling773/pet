@@ -15,6 +15,7 @@ interface IFormInput {
   description: string;
   short_description: string;
   photos: File[];
+  gender: string;
 }
 
 interface AnimalBreed {
@@ -70,6 +71,7 @@ function PetFormComponent() {
           setValue("age", result?.age);
           setValue("price", result?.price);
           setValue("breed_id", result?.breed_id);
+          setValue("gender", result?.gender);
 
           setValue("description", result?.description);
           setValue("short_description", result?.short_description);
@@ -158,6 +160,7 @@ function PetFormComponent() {
       breed_id: data.breed_id,
       description: data.description,
       short_description: data.short_description,
+      gender: data.gender,
     };
 
     if (
@@ -174,6 +177,9 @@ function PetFormComponent() {
       .then((res) => {
         console.log(res);
 
+        const animalID = res.data.id;
+        console.error(animalID);
+
         if (selectedImageFiles?.length >= 1) {
           const formData = new FormData();
           for (let i = 0; i < selectedImageFiles?.length; i++) {
@@ -189,7 +195,14 @@ function PetFormComponent() {
               formData,
               { headers }
             )
-            .then(() => setSelectedImageFiles([]))
+            .then(async (response) => {
+              console.log(response);
+              const facebook = await axios.get(
+                environment.endpoint + "/animal/facebook-post/" + animalID
+              );
+              console.log(facebook);
+              setSelectedImageFiles([]);
+            })
             .catch((error) => setMsg(error));
         }
 
@@ -350,7 +363,7 @@ function PetFormComponent() {
                     </div>
 
                     <div className="row">
-                      <div className="col-md-6 col-12">
+                      <div className="col-md-4 col-12">
                         <div className="form-grp mb-3">
                           <label htmlFor="age" className="">
                             Age <span>*</span>
@@ -371,10 +384,10 @@ function PetFormComponent() {
                           )}
                         </div>
                       </div>
-                      <div className="col-md-6 col-12">
+                      <div className="col-md-4 col-12">
                         <div className="form-grp mb-3">
                           <label htmlFor="price" className="">
-                            Price <span>*</span>
+                            Adoption Fee <span>*</span>
                           </label>
                           <input
                             type="number"
@@ -387,6 +400,44 @@ function PetFormComponent() {
                             })}
                           />
                           {errors.price && (
+                            <span className="error-input">
+                              This field is required
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="col-md-4 col-12">
+                        <div className="form-grp mb-3">
+                          <label htmlFor="price" className="">
+                            Gender <span>*</span>
+                          </label>
+                          <select
+                            className="form-select "
+                            aria-label="breed select"
+                            name="gender"
+                            style={{
+                              width: "100%",
+                              background: "#f5f2eb",
+                              border: "none",
+                              fontSize: "14px",
+                              padding: "15px 20px",
+                              borderRadius: "5px",
+                              display: "block",
+                              fontWeight: 400,
+                            }}
+                            {...register("gender", {
+                              required: true,
+                              maxLength: 20,
+                            })}
+                            defaultValue=""
+                          >
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Male(Desexed)">Male(Desexed)</option>
+                            <option value="Female">Female</option>
+                          </select>
+                          {errors.gender && (
                             <span className="error-input">
                               This field is required
                             </span>
@@ -421,7 +472,6 @@ function PetFormComponent() {
                               required: true,
                               maxLength: 20,
                             })}
-                            defaultValue={breedId.toString()}
                           >
                             <option value="">Select a breed first</option>
                             {breeds?.map((breed, index) => {
