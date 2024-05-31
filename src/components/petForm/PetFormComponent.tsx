@@ -197,10 +197,14 @@ function PetFormComponent() {
             )
             .then(async (response) => {
               console.log(response);
-              const facebook = await axios.get(
-                environment.endpoint + "/animal/facebook-post/" + animalID
-              );
-              console.log(facebook);
+
+              if (id) {
+                const facebook = await axios.get(
+                  environment.endpoint + "/animal/facebook-post/" + animalID
+                );
+                console.log(facebook);
+              }
+
               setSelectedImageFiles([]);
             })
             .catch((error) => setMsg(error));
@@ -436,6 +440,9 @@ function PetFormComponent() {
                             <option value="Male">Male</option>
                             <option value="Male(Desexed)">Male(Desexed)</option>
                             <option value="Female">Female</option>
+                            <option value="Female(Desexed)">
+                              Female(Desexed)
+                            </option>
                           </select>
                           {errors.gender && (
                             <span className="error-input">
